@@ -14,7 +14,15 @@ builder.Services.AddDbContext<StoreContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.Services.AddCors();
+
 var app = builder.Build();
+
+app.UseCors(opt =>
+{
+    opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials()
+    .WithOrigins("http://localhost:3000", "https://localhost:3000");
+});
 
 if (app.Environment.IsDevelopment())
 {

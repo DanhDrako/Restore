@@ -1,5 +1,8 @@
 # Here is resource for Restore Solution.
 
+> [!NOTE]
+> For BE
+
 ```bash
 -cd API:
 nuget:
@@ -14,4 +17,16 @@ microsoft.entityframeworkcore.sqlserver
 
 -want to restore all database?
 -- dotnet ef database drop
+```
+
+> [!NOTE]
+> For FE
+
+```bash
+-cd Restore
+npm create vite@latest
+npm i vite-plugin-mkcert -D
+npm install @mui/material @emotion/react @emotion/styled
+npm install @fontsource/roboto
+npm install @mui/icons-material
 ```
