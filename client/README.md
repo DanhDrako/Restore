@@ -12,4 +12,6 @@
 -- npm install @fontsource/roboto
 -- npm install @mui/icons-material
 -- npm i react-router
+-- npm install @reduxjs/toolkit
+-- npm install react-redux
 ```
