@@ -14,4 +14,5 @@
 -- npm i react-router
 -- npm install @reduxjs/toolkit
 -- npm install react-redux
+-- npm install --save react-toastify
 ```
