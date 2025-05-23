@@ -6,13 +6,14 @@ export const catalogApi = createApi({
   reducerPath: 'catalogApi',
   baseQuery: baseQueryWithErrorHandling,
   endpoints: (build) => ({
-    getProducts: build.query<Product[], void>({
+    fetchProducts: build.query<Product[], void>({
       query: () => 'products'
     }),
-    getProduct: build.query<Product, number>({
+    fetchProductDetails: build.query<Product, number>({
       query: (id) => `products/${id}`
     })
   })
 });
 
-export const { useGetProductsQuery, useGetProductQuery } = catalogApi;
+export const { useFetchProductsQuery, useFetchProductDetailsQuery } =
+  catalogApi;

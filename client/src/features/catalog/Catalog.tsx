@@ -1,8 +1,8 @@
 import ProductList from './ProductList';
-import { useGetProductsQuery } from './catalogApi';
+import { useFetchProductsQuery } from './catalogApi';
 
 export default function Catalog() {
-  const { data: products, error, isLoading } = useGetProductsQuery();
+  const { data: products, error, isLoading } = useFetchProductsQuery();
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading products</div>;
