@@ -1,13 +1,45 @@
 using API.Data;
+using API.Entities;
 using API.Middleware;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
+using NSwag;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
-builder.Services.AddOpenApiDocument();
+builder.Services.AddControllers(opt =>
+{
+    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+    opt.Filters.Add(new AuthorizeFilter(policy));
+});
+
+builder.Services.AddOpenApiDocument(options =>
+{
+    options.PostProcess = document =>
+    {
+        document.Info = new OpenApiInfo
+        {
+            Version = "v1",
+            Title = "Restore API",
+            Description = "An ASP.NET Core Web API for managing Restore items",
+            TermsOfService = "https://example.com/terms",
+            Contact = new OpenApiContact
+            {
+                Name = "Example Contact",
+                Url = "https://example.com/contact"
+            },
+            License = new OpenApiLicense
+            {
+                Name = "Example License",
+                Url = "https://example.com/license"
+            }
+        };
+    };
+});
 
 // config for db context
 builder.Services.AddDbContext<StoreContext>(options =>
@@ -17,6 +49,13 @@ builder.Services.AddDbContext<StoreContext>(options =>
 
 builder.Services.AddCors();
 builder.Services.AddTransient<ExceptionMiddleware>();
+
+builder.Services.AddIdentityApiEndpoints<User>(opt =>
+{
+    opt.User.RequireUniqueEmail = true;
+})
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<StoreContext>();
 
 var app = builder.Build();
 
@@ -39,8 +78,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUi(); // UseSwaggerUI Protected by if (env.IsDevelopment())
 }
 
+builder.Services.AddAuthentication();
+builder.Services.AddAuthorization();
+
 // Configure the HTTP request pipeline.
 app.MapControllers();
+
+app.MapGroup("api").MapIdentityApi<User>(); //api/login
 
 DbInitializer.InitDb(app);
 
