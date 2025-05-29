@@ -10,10 +10,11 @@ export default function NotFound() {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        p: 6
       }}
     >
-      <SearchOff />
+      <SearchOff sx={{ fontSize: 100 }} color="primary" />
       <Typography gutterBottom variant="h3">
         Oops - we could not find what you are looking for
       </Typography>

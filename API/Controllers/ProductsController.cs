@@ -2,6 +2,7 @@
 using API.Entities;
 using API.Extensions;
 using API.RequestHelpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,7 @@ namespace API.Controllers
 {
     public class ProductsController(StoreContext context) : BaseApiController
     {
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<List<Product>>> GetProducts([FromQuery] ProductParams productParams)
         {
@@ -26,6 +28,7 @@ namespace API.Controllers
             return products;
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")] //api/product/2
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
@@ -36,6 +39,7 @@ namespace API.Controllers
             return product;
         }
 
+        [AllowAnonymous]
         [HttpGet("filters")]
         public async Task<IActionResult> GetFilters()
         {

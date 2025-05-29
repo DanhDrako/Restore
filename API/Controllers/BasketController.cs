@@ -2,6 +2,7 @@
 using API.DTOs;
 using API.Entities;
 using API.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,7 @@ namespace API.Controllers
 {
     public class BasketController(StoreContext context) : BaseApiController
     {
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<BasketDto>> GetBasket()
         {
@@ -19,6 +21,7 @@ namespace API.Controllers
             return basket.ToDto();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult<BasketDto>> AddItemToBasket(int productId, int quantity)
         {
@@ -41,8 +44,7 @@ namespace API.Controllers
             return BadRequest("Problem updating basket");
         }
 
-
-
+        [AllowAnonymous]
         [HttpDelete]
         public async Task<ActionResult> RemoveBasketItem(int productId, int quantity)
         {
