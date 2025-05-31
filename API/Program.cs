@@ -1,6 +1,7 @@
 using API.Data;
 using API.Entities;
 using API.Middleware;
+using API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -49,6 +50,7 @@ builder.Services.AddDbContext<StoreContext>(options =>
 
 builder.Services.AddCors();
 builder.Services.AddTransient<ExceptionMiddleware>();
+builder.Services.AddScoped<PaymentsService>();
 
 builder.Services.AddIdentityApiEndpoints<User>(opt =>
 {

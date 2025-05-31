@@ -17,12 +17,24 @@ type Props = {
 
 export default function UserMenu({ user }: Props) {
   const [logout] = useLogoutMutation();
+  // This component renders a user menu with options for profile, orders, and logout.
+  // It uses Material-UI components for the menu and icons.
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
+  // The anchorEl state holds the current element that the menu is anchored to.
+  // The open variable determines if the menu is currently open based on the anchorEl state.
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    // This function sets the anchor element for the menu when the button is clicked.
+    // It uses the current target of the event to position the menu.
     setAnchorEl(event.currentTarget);
   };
+
+  // The handleClick function is called when the user clicks the button to open the menu.
+  // It sets the anchor element to the button that was clicked, allowing the menu to be positioned relative to it.
   const handleClose = () => {
+    // This function closes the menu by setting the anchor element to null.
+    // It is called when the menu is closed, either by clicking outside or selecting an option.
     setAnchorEl(null);
   };
 
@@ -41,6 +53,7 @@ export default function UserMenu({ user }: Props) {
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
+        // This component renders a menu that appears when the user clicks the button.
         MenuListProps={{
           'aria-labelledby': 'basic-button'
         }}

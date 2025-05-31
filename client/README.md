@@ -16,4 +16,8 @@
 -- npm install react-redux
 -- npm install --save react-toastify
 -- npm i react-hook-form zod @hookform/resolvers
+-- npm install --save @stripe/react-stripe-js @stripe/stripe-js
+-- npm i @mui/lab
+-- npm i js-cookie
+-- npm i -D @types/js-cookie
 ```
