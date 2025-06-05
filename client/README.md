@@ -20,4 +20,6 @@
 -- npm i @mui/lab
 -- npm i js-cookie
 -- npm i -D @types/js-cookie
+-- npm i date-fns
+-- brew install stripe/stripe-cli/stripe
 ```
