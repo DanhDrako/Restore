@@ -5,9 +5,11 @@ import type { CreateOrder, Order } from '../../app/models/order';
 export const orderApi = createApi({
   reducerPath: 'orderApi',
   baseQuery: baseQueryWithErrorHandling,
+  tagTypes: ['Orders'],
   endpoints: (builder) => ({
     fetchOrders: builder.query<Order[], void>({
-      query: () => 'orders'
+      query: () => 'orders',
+      providesTags: ['Orders']
     }),
     fetchOrderDetails: builder.query<Order, number>({
       query: (id) => `orders/${id}`
@@ -18,9 +20,10 @@ export const orderApi = createApi({
         method: 'POST',
         body: order
       }),
-      async onQueryStarted(_, { queryFulfilled }) {
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
         try {
           await queryFulfilled;
+          dispatch(orderApi.util.invalidateTags(['Orders'])); // Invalidate orders cache after creating a new order
         } catch (error) {
           console.log(error);
           throw error; // Re-throw the error to be handled by the base query error handling

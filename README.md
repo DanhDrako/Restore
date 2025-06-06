@@ -33,4 +33,49 @@ microsoft.entityframeworkcore.sqlserver
 -- npm install @mui/material @emotion/react @emotion/styled
 -- npm install @fontsource/roboto
 -- npm install @mui/icons-material
+-- npm i react-router
+-- npm install @reduxjs/toolkit
+-- npm install react-redux
+-- npm install --save react-toastify
+-- npm i react-hook-form zod @hookform/resolvers
+-- npm install --save @stripe/react-stripe-js @stripe/stripe-js
+-- npm i @mui/lab
+-- npm i js-cookie
+-- npm i -D @types/js-cookie
+-- npm i date-fns
+-- brew install stripe/stripe-cli/stripe
 ```
+
+> [!NOTE]
+> For Deployment
+> -- Step 1: Config for deployment
+> FE (client):
+
+- config outDir: '../API/wwwroot' -> npm run build
+
+> BE
+
+- Add app.UseDefaultFiles(); app.UseStaticFiles(); to config
+- Add FallBackController -> app.MapFallbackToController("Index", "Fallback") to config;
+
+> Azure:
+
+- Create resource group -> create Web App (Azure Service) -> Create Database (SQL Database)
+
+\*\* Environment variables resource group (App settings | Connection strings)
+
+- Get connection strings from SQL database -> Add Environment variables Web App (Connection strings): Name: "DefaultConnection", Value: abc{Password}xyz, Type: SQLAzure.
+- Add Environment variables Web App (App settings): Name: "StripeSettings\_\_PublishableKey", (same to any variables)
+- Config Webhooks to generate need secret key
+- From SQL Server -> Show networking settings -> Selected networks -> Remove existing rule -> Tick checkbox allow azure.
+
+> -- Step 2: Publish app to Web App
+> BE (API): dotnet publish -c Release -o ./bin/Publish
+
+- Right click to API/Publish folder -> Deploy to Web App -> Selection App Services need to deploy
+
+> -- Step 3: CI/CD deployment
+
+- Add new source "Deployment Center" from Web App -> Select GitHub -> Select repo/branch -> Preview -> Close -> Save (From github, need check actions created ?)
+
+- Git pull -> config it (add build client)
