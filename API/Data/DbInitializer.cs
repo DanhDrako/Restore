@@ -7,7 +7,7 @@ namespace API.Data
 {
     public class DbInitializer
     {
-        public static async void InitDb(WebApplication app)
+        public static async Task InitDb(WebApplication app)
         {
             using var scope = app.Services.CreateScope();
 
@@ -37,8 +37,8 @@ namespace API.Data
 
                 var admin = new User
                 {
-                    UserName = "bob@test.com",
-                    Email = "bob@test.com"
+                    UserName = "admin@test.com",
+                    Email = "admin@test.com"
                 };
 
                 await userManager.CreateAsync(admin, "A@123456a");
