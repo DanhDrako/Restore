@@ -22,4 +22,5 @@
 -- npm i -D @types/js-cookie
 -- npm i date-fns
 -- brew install stripe/stripe-cli/stripe
+-- npm i react-dropzone
 ```
