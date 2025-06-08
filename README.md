@@ -44,10 +44,13 @@ microsoft.entityframeworkcore.sqlserver
 -- npm i -D @types/js-cookie
 -- npm i date-fns
 -- brew install stripe/stripe-cli/stripe
+-- npm i react-dropzone
 ```
 
 > [!NOTE]
 > For Deployment
+
+```bash
 > -- Step 1: Config for deployment
 > FE (client):
 
@@ -79,3 +82,4 @@ microsoft.entityframeworkcore.sqlserver
 - Add new source "Deployment Center" from Web App -> Select GitHub -> Select repo/branch -> Preview -> Close -> Save (From github, need check actions created ?)
 
 - Git pull -> config it (add build client)
+```

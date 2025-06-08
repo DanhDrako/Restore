@@ -8,5 +8,14 @@ export default function RequireAuth() {
   if (isLoading) return <div>Loading...</div>;
 
   if (!user) return <Navigate to="/login" state={{ from: location }} />;
+
+  const adminRoutes = ['/inventory', '/admin-dashboard'];
+
+  if (
+    adminRoutes.includes(location.pathname) &&
+    !user.roles.includes('Admin')
+  ) {
+    return <Navigate to="/" replace />;
+  }
   return <Outlet />;
 }
